@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
 
-    <ImageView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scaleType="centerCrop"
-        android:src="@drawable/login_background" />
-
-    <TextView
-        android:id="@+id/friends_logo_text_pink"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:fontFamily="@font/watermelon_font"
-        android:padding="15dp"
-        android:layout_marginTop="35dp"
-        android:text="Friends "
-        android:textColor="#ff5050"
-        android:textSize="75sp"
-        android:background="@android:color/white"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:background="@android:color/white">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/login_background" />
+
+        <TextView
+            android:id="@+id/friends_logo_text_pink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/watermelon_font"
+            android:padding="15dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="15dp"
+            android:text="Friends "
+            android:textColor="#ff5050"
+            android:textSize="75sp"
+            android:background="@android:color/white"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@android:color/white">
 
             <android.support.v7.widget.CardView
                 android:id="@+id/login_cardView_container"
@@ -124,6 +125,6 @@
 
         </RelativeLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

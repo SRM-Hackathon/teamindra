@@ -5,6 +5,5 @@
         android:state_enabled="true"
         android:drawable="@drawable/state_pressed"/>
     <item
-        android:state_enabled="true"
-        />
+        android:state_enabled="true" />
 </selector>

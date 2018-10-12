@@ -22,7 +22,8 @@ public class BirthdayFragment extends Fragment {
     private TextView mBirthdayTextView;
     private TextView mNextTextView;
 
-    private int mCurrentDay, mCurrentMonth, mCurrentYear;
+    private int mCurrentDayInt, mCurrentMonthInt, mCurrentYearInt;
+    private String mCurrentDayString, mCurrentMonthString, mCurrentYearString;
 
     public interface BirthdayFragmentListener{
         void onBirthdaySubmit(String birthday);
@@ -51,11 +52,26 @@ public class BirthdayFragment extends Fragment {
         mNextTextView = (TextView) view.findViewById(R.id.create_account_birthday_next);
 
         Calendar calendar = Calendar.getInstance();
-        mCurrentDay = calendar.get(Calendar.DAY_OF_MONTH);
-        mCurrentMonth = calendar.get(Calendar.MONTH);
-        mCurrentYear = calendar.get(Calendar.YEAR);
+        mCurrentDayInt = calendar.get(Calendar.DAY_OF_MONTH);
+        mCurrentMonthInt = calendar.get(Calendar.MONTH);
+        mCurrentYearInt = calendar.get(Calendar.YEAR);
 
-        final String currentDateText = mCurrentDay + "-" + mCurrentMonth + "-" + mCurrentYear;
+        if (mCurrentDayInt < 10){
+            mCurrentDayString = "0" + mCurrentDayInt;
+        } else {
+            mCurrentDayString = mCurrentDayInt + "";
+        }
+
+
+        if (mCurrentMonthInt < 10){
+            mCurrentMonthString = "0" + mCurrentMonthInt;
+        } else {
+            mCurrentMonthString = mCurrentMonthInt + "";
+        }
+
+        mCurrentYearString = "" + mCurrentYearInt;
+
+        final String currentDateText = mCurrentDayString + "/" + mCurrentMonthString + "/" + mCurrentYearString;
         mBirthdayTextView.setText(currentDateText);
 
         mBirthdayTextView.setOnClickListener(new View.OnClickListener() {
@@ -64,10 +80,20 @@ public class BirthdayFragment extends Fragment {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        birthDate = dayOfMonth + "-" + month + "-" + year;
+                        if(dayOfMonth < 10){
+                            birthDate = "0" + dayOfMonth + "/";
+                        } else {
+                            birthDate = "" + dayOfMonth + "/";
+                        }
+                        if (month < 10) {
+                            birthDate += "0" + month + "/" + year;
+                        } else {
+                            birthDate += month + "/" + year;
+                        }
+
                         mBirthdayTextView.setText(birthDate);
                     }
-                }, mCurrentYear, mCurrentMonth, mCurrentDay);
+                }, mCurrentYearInt, mCurrentMonthInt, mCurrentDayInt);
                 datePickerDialog.getDatePicker().setMaxDate((new Date()).getTime());
                 datePickerDialog.show();
 

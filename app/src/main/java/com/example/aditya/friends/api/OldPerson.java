@@ -49,7 +49,7 @@ public class OldPerson {
 
     public OldPerson(){
         this.name = "Aditya Kumar";
-        this.birthday = "30-04-1999";
+        this.birthday = "30/04/1999";
         this.password = "abcdefghijk";
         this.gender = "M";
         this.genderPreference = "M";
