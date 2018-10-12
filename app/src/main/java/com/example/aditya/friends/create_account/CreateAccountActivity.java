@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -31,8 +33,7 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
         GenderFragment.GenderFragmentListener,
         InterestFragment.InterestFragmentListener,
         BirthdayFragment.BirthdayFragmentListener,
-        PasswordFragment.PasswordFragmentListener,
-        CreatingAccountFragment.CreatingAccountFragmentListener {
+        PasswordFragment.PasswordFragmentListener{
 
     private OldPerson mOldPersonData;
 
@@ -40,12 +41,16 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
 
     private static ApiManager mApiManager;
 
-    private ProgressBar mCreatingAccountProgressBar;
+    private ProgressBar mProgressBar;
+    private FrameLayout mFrameLayout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.create_account_progress_bar);
+        mFrameLayout = (FrameLayout) findViewById(R.id.create_account_frameLayout);
 
         mOldPersonData = new OldPerson();
 
@@ -94,11 +99,6 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
     }
 
     @Override
-    public void onGenderPreferenceSubmit(String genderPreference) {
-        mOldPersonData.setGenderPreference(genderPreference);
-    }
-
-    @Override
     public void onInterestSubmit(ArrayList<String> interests) {
         mOldPersonData.setInterests(interests);
     }
@@ -113,8 +113,11 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
         mOldPersonData.setBirthday(birthday);
     }
 
+
     @Override
-    public void sendData() {
+    public void onGenderPreferenceSubmit(String genderPreference) {
+        mOldPersonData.setGenderPreference(genderPreference);
+
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString();
         mOldPersonData.setUniqueId(randomUUIDString);
@@ -122,16 +125,16 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
         sendDataToServer();
     }
 
-    @Override
-    public void supplyProgressBar(ProgressBar progressBar) {
-        mCreatingAccountProgressBar = progressBar;
-    }
-
     private void sendDataToServer(){
+        mFrameLayout.setVisibility(View.GONE);
+        mProgressBar.setVisibility(View.VISIBLE);
 
         mApiManager.createOldUser(mOldPersonData, new Callback<OldPerson>() {
             @Override
             public void onResponse(Call<OldPerson> call, Response<OldPerson> response) {
+                mProgressBar.setVisibility(View.GONE);
+                mFrameLayout.setVisibility(View.VISIBLE);
+
                 OldPerson oldPerson = response.body();
                 if (response.isSuccessful() && oldPerson != null){
                     Toast.makeText(CreateAccountActivity.this, "onResponse : successful", Toast.LENGTH_SHORT).show();
@@ -142,6 +145,9 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
 
             @Override
             public void onFailure(Call<OldPerson> call, Throwable t) {
+                mProgressBar.setVisibility(View.GONE);
+                mFrameLayout.setVisibility(View.VISIBLE);
+
                 Toast.makeText(CreateAccountActivity.this, "onFailure " + t.toString(), Toast.LENGTH_SHORT).show();
             }
         });

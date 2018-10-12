@@ -9,4 +9,7 @@ public interface FriendsApi {
     @POST("/register/old")
     Call<OldPerson> saveOldUser(@Body OldPerson oldPerson);
 
+    @POST("/login/old")
+    Call<OldPerson> verifyCredentials(@Body LoginCredential loginCredential);
+
 }

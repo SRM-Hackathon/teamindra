@@ -32,4 +32,9 @@ public class ApiManager {
         oldPersonCall.enqueue(callback);
     }
 
+    public void verifyCredentials(LoginCredential loginCredential, Callback<OldPerson> callback){
+        Call<OldPerson> verifyCredentialCall = mService.verifyCredentials(loginCredential);
+        verifyCredentialCall.enqueue(callback);
+    }
+
 }

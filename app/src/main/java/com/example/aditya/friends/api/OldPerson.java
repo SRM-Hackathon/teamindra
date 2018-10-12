@@ -41,6 +41,12 @@ public class OldPerson {
     @SerializedName("profile_image")
     String profileImageUrl;
 
+    @SerializedName("other_image")
+    String verificationImageUrl;
+
+    @SerializedName("message")
+    String message;
+
     public OldPerson(){
         this.name = "Aditya Kumar";
         this.birthday = "30-04-1999";
@@ -55,6 +61,8 @@ public class OldPerson {
         this.interests.add("AOJDGafsa");
         this.uniqueId = "9we7e9f";
         this.profileImageUrl = "https://asdgoasdhfuoa.com";
+        this.verificationImageUrl = "https://sadkjlhasdjk.com";
+        this.message = "";
 
     }
 
@@ -150,5 +158,13 @@ public class OldPerson {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

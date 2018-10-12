@@ -129,14 +129,6 @@ public class GenderPreferenceFragment extends Fragment {
                     } /* else if(mOtherRadioButton.isChecked()){
                         mListener.onGenderPreferenceSubmit("o");
                     } */
-
-                    CreatingAccountFragment creatingAccountFragment = new CreatingAccountFragment();
-                    getFragmentManager()
-                            .beginTransaction()
-                            .setCustomAnimations(R.animator.fade_in, R.animator.fade_out)
-                            .replace(R.id.create_account_frameLayout, creatingAccountFragment)
-                            .addToBackStack(null)
-                            .commit();
                 } else {
                     mErrorMessageTextView.setVisibility(View.VISIBLE);
                 }

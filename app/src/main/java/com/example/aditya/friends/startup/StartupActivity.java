@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.create_account.CreateAccountActivity;
+import com.example.aditya.friends.login.LoginActivity;
 
 import static com.example.aditya.friends.utils.FriendsUtils.PERMISSION_ACCESS_FINE_LOCATION;
 
@@ -44,7 +45,8 @@ public class StartupActivity extends AppCompatActivity {
         mLoginTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent to login activity
+                Intent intent = new Intent(StartupActivity.this, LoginActivity.class);
+                startActivity(intent);
             }
         });
 

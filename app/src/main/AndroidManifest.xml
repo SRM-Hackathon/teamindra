@@ -25,6 +25,8 @@
             android:exported="true" />
         <activity android:name=".create_account.CreateAccountActivity"
             android:exported="true" />
+        <activity android:name=".login.LoginActivity"
+            android:exported="true"/>
 
 
     </application>
