@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="NAME"
+             android:layout_marginLeft="15dp"
+             android:layout_margin="15dp"
+             android:textStyle="bold"
+             android:textSize="20dp"
+             android:background="#3ed3d3d3"
+             android:padding="10dp"
+             />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Ayush Sharma"
+            android:paddingLeft="20dp"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="INTEREST"
+            android:layout_marginLeft="15dp"
+            android:layout_margin="15dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:background="#3ed3d3d3"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Girls"
+            android:paddingLeft="20dp"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="AGE"
+            android:layout_marginLeft="15dp"
+            android:layout_margin="15dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:background="#3ed3d3d3"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="20"
+            android:paddingLeft="20dp"
+            android:textSize="15dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NUMBER"
+            android:layout_marginLeft="15dp"
+            android:layout_margin="15dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:background="#3ed3d3d3"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="8610721153"
+            android:paddingLeft="20dp"
+            android:textSize="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GENDER"
+            android:layout_marginLeft="15dp"
+            android:layout_margin="15dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:background="#3ed3d3d3"
+            android:padding="10dp"
+            />
+        <RadioGroup
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Male"
+                android:layout_marginTop="10dp"
+                android:checked="true"
+                android:layout_marginBottom="10dp"
+                />
+
+            <RadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Female" />
+
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Gender Preference"
+            android:layout_marginLeft="15dp"
+            android:layout_margin="15dp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:background="#3ed3d3d3"
+            android:padding="10dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Girls"
+            android:paddingLeft="20dp"
+            android:textSize="15dp"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="30dp"
+            />
+    </LinearLayout>
+</ScrollView>
+<!--<RadioGroup-->
+<!--android:id="@+id/gender"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content" >-->
+
+<!--<RadioButton-->
+    <!--android:id="@+id/radioMale"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="15dp"-->
+    <!--android:text="Male"-->
+    <!--android:layout_marginTop="15dp"-->
+    <!--android:checked="true"-->
+    <!--android:layout_marginBottom="10dp"-->
+    <!--/>-->
+
+<!--<RadioButton-->
+    <!--android:id="@+id/radioFemale"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginLeft="15dp"-->
+    <!--android:text="Female" />-->
+
+<!--</RadioGroup>-->
+
