@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/create_account_gender_preference_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="What's your Gender Preference?"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="60dp"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/create_account_error_gender_preference_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please choose atleast one choice"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/create_account_gender_preference_male_container"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_margin="20dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_person_black_24dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Male"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:gravity="center_vertical"
+                android:layout_margin="5dp" />
+
+            <RadioButton
+                android:id="@+id/create_account_gender_preference_male_radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/create_account_gender_preference_female_container"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_person_black_24dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Female"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:gravity="center_vertical"
+                android:layout_margin="5dp" />
+
+            <RadioButton
+                android:id="@+id/create_account_gender_preference_female_radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/create_account_gender_preference_any_container"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_margin="20dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_person_black_24dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Any of the above"
+                android:textSize="24sp"
+                android:textColor="@android:color/black"
+                android:gravity="center_vertical"
+                android:layout_margin="5dp" />
+
+            <RadioButton
+                android:id="@+id/create_account_gender_preference_any_radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"/>
+
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/login_cardView_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="60dp"
+            app:cardBackgroundColor="#dce53256"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/create_account_gender_preference_name_next"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                android:text="Next"
+                android:textAlignment="center"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/miss_smarty_pants"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"/>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>

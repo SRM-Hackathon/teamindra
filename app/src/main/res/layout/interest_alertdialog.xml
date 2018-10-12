@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add your Interest"
+        android:layout_margin="8dp"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textColor="#dce53256"/>
+
+    <EditText
+        android:id="@+id/interest_alertDialog_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapWords"
+        android:hint="Type your interest here.."
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="15dp"/>
+
+</LinearLayout>

@@ -1,9 +1,14 @@
 package com.example.aditya.friends.splash;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -12,9 +17,13 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.home.HomeActivity;
+import com.example.aditya.friends.startup.StartupActivity;
+
+import static com.example.aditya.friends.utils.FriendsUtils.PERMISSION_ACCESS_FINE_LOCATION;
 
 public class SplashActivity extends AppCompatActivity{
 
@@ -27,8 +36,6 @@ public class SplashActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        getSupportActionBar().hide();
 
         mFriendsLogo = (ImageView) findViewById(R.id.friends_logo);
         mFriendsLogoText = (ImageView) findViewById(R.id.friends_logo_text);
@@ -67,8 +74,7 @@ public class SplashActivity extends AppCompatActivity{
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // TODO : Change HomeActivity to respective actvity by checking the data
-                Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                Intent intent = new Intent(SplashActivity.this, StartupActivity.class);
                 startActivity(intent);
                 finish();
             }

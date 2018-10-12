@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.aditya.friends">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +21,10 @@
         </activity>
         <activity android:name=".home.HomeActivity"
             android:exported="true"/>
+        <activity android:name=".startup.StartupActivity"
+            android:exported="true" />
+        <activity android:name=".create_account.CreateAccountActivity"
+            android:exported="true" />
 
 
     </application>

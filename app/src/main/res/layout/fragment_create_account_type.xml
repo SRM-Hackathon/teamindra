@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/create_account_type_old"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#e53256">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/watermelon_font"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Old"
+            android:textColor="#ffffff"
+            android:textSize="50sp" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/create_account_type_companion"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#79CDCD">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/watermelon_font"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="Companion Expert"
+            android:textColor="#ffffff"
+            android:textSize="50sp" />
+    </RelativeLayout>
+
+
+</LinearLayout>
