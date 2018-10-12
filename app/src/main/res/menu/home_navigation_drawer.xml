@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menu_home_navigation_drawer_home"
+            android:title="Home"/>
+        <item
+            android:id="@+id/menu_home_navigation_drawer_appointment"
+            android:title="Appointments"/>
+        <item
+            android:id="@+id/menu_home_navigation_drawer_companionship_experts"
+            android:title="Companionship Experts"/>
+        <item
+            android:id="@+id/menu_home_navigation_drawer_settings"
+            android:title="Settings"/>
+        <item
+            android:id="@+id/menu_home_navigation_drawer_edit_profile"
+            android:title="Edit Profile"/>
+
+    </group>
+</menu>

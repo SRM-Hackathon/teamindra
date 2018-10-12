@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="192dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/home_header_navigation_drawer_profile_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/home_header_navigation_drawer_default_image"
+        android:alpha="0.50"
+        android:scaleType="center"/>
+
+    <TextView
+        android:id="@+id/home_header_navigation_drawer_name_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_alignBottom="@id/home_header_navigation_drawer_profile_imageView"
+        android:text="Aditya Kumar"
+        android:textStyle="bold"
+        android:textColor="#000000"/>
+
+
+
+</RelativeLayout>
