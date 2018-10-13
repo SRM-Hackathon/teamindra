@@ -90,7 +90,7 @@ public class SplashActivity extends AppCompatActivity{
             }
         }, 610 + 500);
 
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(CreateAccountActivity.this);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(SplashActivity.this);
         final String pass = mPreferences.getString("password", "");
 
         mHandler.postDelayed(new Runnable() {
