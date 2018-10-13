@@ -52,12 +52,15 @@ def receive_old(user_id):
     # global model
     # model = KeyedVectors.load_word2vec_format("glove.6B.50d.txt")
     # gensimtest.search_related_words(model)
+    print("break point 1")
     command_old_people = Old.query.filter_by(unique_id=user_id).first()
+    print(command_old_people)
     old_user_id = command_old_people.unique_id
     old_gender_preference = command_old_people.gender_preference
     old_latitude = command_old_people.latitude
     old_longitude = command_old_people.longitude
-    old_interests_list = command_old_people.interests
+    old_interests_list = command_old_people.interests.split(',')
+    print(old_interests_list)
     # young_userID = [1,2,3,4,5,6,7,8,9,10,11,12]
     # young_gender = ['male','female','male','female','male','female','male','female','male','female','male','female']
     # young_interests = [['algorithm','baking','cooking'],['basketball','baseball','playing cricket'], ['c','c','c'],['d', 'd', 'd'], ['e', 'e', 'e'], ['f', 'f', 'f'], ['g'], ['h'], ['i'], ['j'], ['k'], ['l']]
@@ -74,17 +77,22 @@ def receive_old(user_id):
     young_lat = []
     young_long = []
     young_profile_pic = []
+    print("break point 2")
     for user in Young.query.all():
         if 6371 * math.acos(math.cos(math.radians(old_latitude))*math.cos(math.radians(user.latitude))*math.cos(math.radians(user.longitude) - math.radians(old_longitude))+math.sin(math.radians(old_latitude))*math.sin(math.radians(user.latitude))) < 20:
             young_userID.append(user.unique_id)
             young_gender.append(user.gender)
             young_interests.append(user.interests)
-            young_ratings.append(user.ratings)
+            young_ratings.append(user.rating)
             young_name.append(user.name)
             young_lat.append(user.latitude)
             young_long.append(user.longitude)
             young_profile_pic.append(user.profile_image)
-
+    print(young_interests)
+    # print(young_lat)
+    # print(young_long)
+    print(young_name)
+    print("break point 3")
     display_index = []
     x = 0
     for i in young_gender:
@@ -95,12 +103,14 @@ def receive_old(user_id):
                               young_dist, young_profile_pic[x]])
         # print(young_dist)
         x = x + 1
-    # print(display_index)
-    # pool = ThreadPool(8)
+    print(display_index)
+    # pool = ThreadPool(8)]
+    print("break point 4")
     interests_list = []
     for i in display_index:
     # print(i[0])
         interests_list.append([i[0], i[1]])  # inserting the interests and user_id of every person into a list
+    print("Interests list", interests_list)
     # print(interests_list)
     # match_queue = queue.Queue(maxsize=20)  # this queue will store the final list of CEs to be displayed
 
@@ -108,8 +118,10 @@ def receive_old(user_id):
 
     results = []
     # print(interests_list)
-    for i in interests_list:
-        results.append(interest_matcher(old_interests_list,old_user_id,i))  # multi-threading interest_matcher
+    # for i in interests_list:
+    results = interest_matcher(old_interests_list,old_user_id,interests_list)  # multi-threading interest_matcher
+    # print(results)
+    print("break point 5")
     json_string = json.dumps(results)
 
     return(json_string)
@@ -141,15 +153,21 @@ def interest_matcher(old_interests,old_user_id,young_id_interests):
     # index_tracker = 0
     # common_interests = []
     young_tuple = [] # Consists of [salience,young_id]
+    
     for interest in old_interests:
-        # print(interest)
+        split_old_interest = []
+        print("interest", interest)
         # index_tracker = index_tracker+1
         split_old_interest = interest.split(' ')
-        print(split_old_interest)
+        # split_old_interest.append(interest)
+        print("split old interest", split_old_interest)
         for i in young_id_interests:
+            print("i in young_id_interest", i)
             maxsmallresult = -1;
             for each_interest in i[0]:
+                print("each interest", each_interest)
                 split_young_interest = each_interest.split(' ')
+                print("split young interest", split_young_interest)
                 result = model.n_similarity(split_old_interest,split_young_interest)
                 if result > maxsmallresult:
                     maxsmallresult = result

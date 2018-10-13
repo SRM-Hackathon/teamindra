@@ -22,6 +22,7 @@ def register_old():
     rating = randint(1,5)
     unique_id = request.json['unique_id']
     profile_image = request.json['profile_image']
+    print(profile_image)
     other_image = request.json['other_image']
     new_user = Old(name=name, password=hashed_password, gender=gender, gender_preference=gender_preference, contact=contact, latitude=latitude,longitude=longitude, interests=''.join(interests), unique_id=unique_id, profile_image=profile_image)
     db.session.add(new_user)
@@ -49,7 +50,7 @@ def register_young():
         new_user = Young(name=name, password=hashed_password, gender=gender, contact=contact, latitude=latitude, longitude=longitude, interests=interests, unique_id=unique_id, profile_image=profile_image, rating=rating)
         db.session.add(new_user)
         db.session.commit()
-        print ("hello")
+        # print ("hello")
         return jsonify({"message": "User registered"})
     else :
         return jsonify({"message":"Verification failed"})    
@@ -123,10 +124,15 @@ def location_old():
     loc.longitude = longitude
     loc.session.commit()
 
-@app.route('/fetch')
+@app.route('/fetch',methods=['GET','POST'])
 def fetch_from_database():
-    unique_id = request.json['unique_id']
-    top_young_users = receive_old(unique_id)
+    print("hi")
+    unique_id = request.args.get('unique_id')
+    print(unique_id)
+    bla =  receive_old(unique_id)
+    print("hello")
+    print(bla)
+    return bla
 
 
 @app.route('/matches', methods=['POST'])# endpoint for registration of old people
