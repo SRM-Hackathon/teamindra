@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import android.os.Handler;
+import android.widget.ProgressBar;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.api.ApiManager;
@@ -28,6 +31,10 @@ import retrofit2.Response;
 import static com.example.aditya.friends.utils.FriendsUtils.mOldPersonData;
 
 public class MatchFragment extends Fragment {
+
+    private LinearLayout mLinearLayoutContainer;
+    private ProgressBar mProgressBar;
+    private TextView mTextView;
 
     private MatchingView mMatchingView;
     private MatchAdapter mAdapter;
@@ -47,6 +54,9 @@ public class MatchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_match, container, false);
 
+        mLinearLayoutContainer = (LinearLayout) view.findViewById(R.id.home_match_container_linearLayout);
+        mProgressBar = (ProgressBar) view.findViewById(R.id.home_match_progressBar);
+        mTextView = (TextView) view.findViewById(R.id.home_match_textView);
         mRejectImageButton = (ImageButton) view.findViewById(R.id.home_match_close_imageButton);
         mSendRequestImageButton = (ImageButton) view.findViewById(R.id.home_match_check_imageButton);
         mSearchImageButton = (ImageButton) view.findViewById(R.id.home_match_search_imageButton);
@@ -96,26 +106,33 @@ public class MatchFragment extends Fragment {
     }
 
     private void getYoungPeopleAround(){
-        mApiManager.getYoungPeople(mOldPersonData.getUniqueId(), new Callback<YoungPerson>() {
-            @Override
-            public void onResponse(Call<YoungPerson> call, Response<YoungPerson> response) {
-                mProgressBar.setVisibility(View.GONE);
-                mFrameLayout.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.VISIBLE);
+        mLinearLayoutContainer.setVisibility(View.GONE);
+        mTextView.setVisibility(View.VISIBLE);
 
-                YoungPerson youngPerson = response.body();
+        mApiManager.getYoungPeople(mOldPersonData.getUniqueId(), new Callback<ArrayList<YoungPerson>>() {
+            @Override
+            public void onResponse(Call<ArrayList<YoungPerson>> call, Response<ArrayList<YoungPerson>> response) {
+                mProgressBar.setVisibility(View.GONE);
+                mLinearLayoutContainer.setVisibility(View.VISIBLE);
+                mTextView.setVisibility(View.GONE);
+
+                ArrayList<YoungPerson> youngPerson = response.body();
                 if (response.isSuccessful() && youngPerson != null){
-                    Toast.makeText(CreateAccountActivity.this, "onResponse : successful", Toast.LENGTH_SHORT).show();
-                    mOldPersonData = mOldPersonData;
-                    Intent homeIntent = new Intent(CreateAccountActivity.this, HomeActivity.class);
-                    startActivity(homeIntent);
-                    finish();
+                    Toast.makeText(getContext(), "onResponse : successful", Toast.LENGTH_SHORT).show();
+                    ;
                 } else {
-                    Toast.makeText(CreateAccountActivity.this, "Response is : " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Response is : " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<YoungPerson> call, Throwable t) {
+            public void onFailure(Call<ArrayList<YoungPerson>> call, Throwable t) {
+                mProgressBar.setVisibility(View.GONE);
+                mLinearLayoutContainer.setVisibility(View.VISIBLE);
+                mTextView.setVisibility(View.GONE);
+
+                Toast.makeText(getContext(), "onFailure " + t.toString(), Toast.LENGTH_SHORT).show();
 
             }
         });

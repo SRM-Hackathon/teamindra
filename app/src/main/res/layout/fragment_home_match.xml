@@ -95,6 +95,20 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/home_match_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click the magnifying glass to fetch nearby companions!"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:textSize="45dp"
+        android:textColor="#000000"
+        android:fontFamily="@font/miss_smarty_pants"
+        android:gravity="center"
+        android:visibility="gone"/>
+
     <ProgressBar
         android:id="@+id/home_match_progressBar"
         android:layout_width="wrap_content"
