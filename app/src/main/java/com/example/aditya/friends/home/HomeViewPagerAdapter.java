@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import com.example.aditya.friends.home.MatchFragment;
 
 public class HomeViewPagerAdapter extends FragmentStatePagerAdapter{
 
@@ -22,10 +23,6 @@ public class HomeViewPagerAdapter extends FragmentStatePagerAdapter{
                 MatchFragment matchFragment = new MatchFragment();
                 return matchFragment;
             }
-            case 2 : {
-                ProfileFragment profileFragment = new ProfileFragment();
-                return profileFragment;
-            }
         }
 
         return null;
@@ -33,7 +30,7 @@ public class HomeViewPagerAdapter extends FragmentStatePagerAdapter{
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Nullable
@@ -45,9 +42,6 @@ public class HomeViewPagerAdapter extends FragmentStatePagerAdapter{
             }
             case 1 : {
                 return "Matching";
-            }
-            case 2 : {
-                return "Notification";
             }
         }
         return null;

@@ -2,6 +2,8 @@ package com.example.aditya.friends.api;
 
 import com.example.aditya.friends.utils.FriendsUtils;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -37,8 +39,8 @@ public class ApiManager {
         verifyCredentialCall.enqueue(callback);
     }
 
-    public void getYoungPeople(String uniqueId, Callback<YoungPerson> callback){
-        Call<YoungPerson> youngPersonCall = mService.getYoungPeople(uniqueId);
+    public void getYoungPeople(String uniqueId, Callback<ArrayList<YoungPerson>> callback){
+        Call<ArrayList<YoungPerson>> youngPersonCall = mService.getYoungPeople(uniqueId);
         youngPersonCall.enqueue(callback);
     }
 

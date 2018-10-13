@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.os.Handler;
 
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.api.ApiManager;
@@ -24,6 +25,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.aditya.friends.utils.FriendsUtils.mOldPersonData;
+
 public class MatchFragment extends Fragment {
 
     private MatchingView mMatchingView;
@@ -31,10 +34,13 @@ public class MatchFragment extends Fragment {
 
     private ImageButton mRejectImageButton;
     private ImageButton mSendRequestImageButton;
+    private ImageButton mSearchImageButton;
 
     private ArrayList<YoungPerson> mYoungPeople;
 
     private ApiManager mApiManager;
+
+    private boolean mTimeBuffer;
 
     @Nullable
     @Override
@@ -43,6 +49,8 @@ public class MatchFragment extends Fragment {
 
         mRejectImageButton = (ImageButton) view.findViewById(R.id.home_match_close_imageButton);
         mSendRequestImageButton = (ImageButton) view.findViewById(R.id.home_match_check_imageButton);
+        mSearchImageButton = (ImageButton) view.findViewById(R.id.home_match_search_imageButton);
+        mTimeBuffer = true;
 
         mYoungPeople = new ArrayList<>();
 
@@ -66,22 +74,38 @@ public class MatchFragment extends Fragment {
             }
         });
 
-        getYoungPeopleAround();
+        mSearchImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mTimeBuffer){
+                    getYoungPeopleAround();
+                    mTimeBuffer = false;
+                    (new Handler()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mTimeBuffer = true;
+                        }
+                    }, 10000);
+                } else {
+                    Toast.makeText(getContext(), "Wait for few second to enable thsi feature..", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return view;
     }
 
     private void getYoungPeopleAround(){
-        mApiManager.getYoungPeople(FriendsUtils.mOldPersonData.getUniqueId(), new Callback<YoungPerson>() {
+        mApiManager.getYoungPeople(mOldPersonData.getUniqueId(), new Callback<YoungPerson>() {
             @Override
             public void onResponse(Call<YoungPerson> call, Response<YoungPerson> response) {
                 mProgressBar.setVisibility(View.GONE);
                 mFrameLayout.setVisibility(View.VISIBLE);
 
                 YoungPerson youngPerson = response.body();
-                if (response.isSuccessful() && oldPerson != null){
+                if (response.isSuccessful() && youngPerson != null){
                     Toast.makeText(CreateAccountActivity.this, "onResponse : successful", Toast.LENGTH_SHORT).show();
-                    FriendsUtils.mOldPersonData = mOldPersonData;
+                    mOldPersonData = mOldPersonData;
                     Intent homeIntent = new Intent(CreateAccountActivity.this, HomeActivity.class);
                     startActivity(homeIntent);
                     finish();

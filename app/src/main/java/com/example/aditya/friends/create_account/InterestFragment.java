@@ -86,7 +86,7 @@ public class InterestFragment extends Fragment{
         mAddInterestTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View view = LayoutInflater.from(getContext()).inflate(R.layout.interest_alertdialog, null);
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.alert_dialog_interest, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
                 builder.setView(view);
