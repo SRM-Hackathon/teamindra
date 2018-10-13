@@ -2,9 +2,11 @@ package com.example.aditya.friends.create_account;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ import com.example.aditya.friends.R;
 import com.example.aditya.friends.api.ApiManager;
 import com.example.aditya.friends.api.OldPerson;
 import com.example.aditya.friends.home.HomeActivity;
+import com.example.aditya.friends.login.LoginActivity;
 import com.example.aditya.friends.utils.FriendsUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -50,6 +53,10 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
 
     private ProgressBar mProgressBar;
     private FrameLayout mFrameLayout;
+
+
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -135,6 +142,11 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
     private void sendDataToServer(){
         mFrameLayout.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
+
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(CreateAccountActivity.this);
+        mEditor = mPreferences.edit();
+        mEditor.putString("password", FriendsUtils.mOldPersonData.getPassword());
+        mEditor.apply();
 
         mApiManager.createOldUser(mOldPersonData, new Callback<OldPerson>() {
             @Override

@@ -49,10 +49,14 @@ public class PasswordFragment extends Fragment {
         mPasswordStrengthTextView = (TextView) view.findViewById(R.id.login_password_strength);
 
         mNextTextView.setOnClickListener(new View.OnClickListener() {
-            String password = mPasswordEditText.getText().toString().trim();
             @Override
             public void onClick(View v) {
-                mListener.onPasswordSubmit(password);
+                String password = mPasswordEditText.getText().toString().trim();
+                if (password.length() >=10){
+                    mListener.onPasswordSubmit(password);
+                } else {
+                    mErrorMessage.setVisibility(View.VISIBLE);
+                }
             }
         });
 

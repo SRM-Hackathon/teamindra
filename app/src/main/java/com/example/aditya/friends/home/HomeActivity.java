@@ -10,10 +10,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
+import android.content.Intent;
 
 import com.example.aditya.friends.R;
+import com.example.aditya.friends.appointment.AppointmentActivity;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -54,6 +57,16 @@ public class HomeActivity extends AppCompatActivity {
                 mHomeDrawerLayout.closeDrawers();
                 menuItem.setChecked(false);
 
+                switch (menuItem.getItemId()){
+                    case R.id.menu_home_navigation_drawer_home : {
+                        mHomeDrawerLayout.closeDrawers();
+                    }
+                    case R.id.menu_home_navigation_drawer_appointment : {
+                        Intent intent = new Intent(HomeActivity.this, AppointmentActivity.class);
+                        startActivity(intent);
+                    }
+                }
+
                 // Add code here to update the UI based on the item selected
                 // For example, swap UI fragments here
                 return true;
@@ -62,11 +75,20 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home_activity, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
+            case android.R.id.home: {
                 mHomeDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            }
+            case R.id.menu_home_activity_logout : {
+            }
 
         }
         return super.onOptionsItemSelected(item);

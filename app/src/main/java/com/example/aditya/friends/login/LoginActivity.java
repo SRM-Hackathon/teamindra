@@ -1,7 +1,9 @@
 package com.example.aditya.friends.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -30,6 +32,9 @@ public class LoginActivity extends AppCompatActivity implements NumberFragment.N
 
     private ProgressBar mProgressBar;
     private FrameLayout mFrameLayout;
+
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,7 +72,10 @@ public class LoginActivity extends AppCompatActivity implements NumberFragment.N
         mFrameLayout.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
 
-        //TODO : Send request to the server to check for password and number
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        mEditor = mPreferences.edit();
+        mEditor.putString("password", FriendsUtils.mOldPersonData.getPassword());
+        mEditor.apply();
 
         mApiManager.verifyCredentials(mLoginCredentials, new Callback<OldPerson>() {
             @Override

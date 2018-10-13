@@ -54,6 +54,8 @@ public class IdentityVerificationFragment extends Fragment {
     private Bitmap mIdentityImage;
     private String mUrl;
 
+    private String textScanned = "";
+
     private static final int TAKE_PICTURE = 2001;
     private static final int REQUEST_STORAGE_PERMISSION = 2003;
 
@@ -177,7 +179,8 @@ public class IdentityVerificationFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
                     @Override
                     public void onSuccess(FirebaseVisionText result) {
-                        Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Scanned text : " + result.getText(), Toast.LENGTH_SHORT).show();
+                        textScanned = result.getText();
                     }
                 })
                 .addOnFailureListener(
@@ -211,7 +214,11 @@ public class IdentityVerificationFragment extends Fragment {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 mUrl = profilePictureRef.getDownloadUrl().toString();
-                mListener.onSuccessfulUploadImage(mUrl);
+                if (textScanned.toLowerCase().equals(mVerificationCode.getText().toString().toLowerCase())){
+                    mListener.onSuccessfulUploadImage(mUrl);
+                } else {
+                    Toast.makeText(getContext(), "The scanned text do not match. Make Sure picture is Portrait and text is capitalized and clear", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

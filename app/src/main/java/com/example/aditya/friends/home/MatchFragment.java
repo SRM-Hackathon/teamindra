@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.api.ApiManager;
+import com.example.aditya.friends.api.Appointment;
 import com.example.aditya.friends.api.OldPerson;
 import com.example.aditya.friends.api.YoungPerson;
 import com.example.aditya.friends.create_account.CreateAccountActivity;
@@ -67,7 +68,7 @@ public class MatchFragment extends Fragment {
         mApiManager = ApiManager.getInstance();
 
         mMatchingView = (MatchingView) view.findViewById(R.id.home_match_matchingView);
-        mAdapter = new MatchAdapter(getActivity(), mYoungPeople);
+        mAdapter = new MatchAdapter(getActivity(), FriendsUtils.youngPeople);
         mMatchingView.setAdapter(mAdapter);
 
         mRejectImageButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +103,35 @@ public class MatchFragment extends Fragment {
             }
         });
 
+        mMatchingView.setListener(new MatchingView.SwipeMatchListener() {
+            @Override
+            public void onViewSwipedToLeft(int position) {
+                YoungPerson youngPerson = FriendsUtils.youngPeople.get(position);
+                Toast.makeText(getContext(), youngPerson.getName() + " has been rejected by you!", Toast.LENGTH_SHORT);
+
+            }
+
+            @Override
+            public void onViewSwipedToRight(int position) {
+                YoungPerson youngPerson = FriendsUtils.youngPeople.get(position);
+                Appointment appointment = new Appointment();
+                appointment.setDate("0" + (position+1) + "/10/2018");
+                appointment.setTime("4:00 PM");
+                appointment.setLocation("Lohar Gali, Agra");
+                appointment.setUniqueIdOld(FriendsUtils.mOldPersonData.getUniqueId());
+                appointment.setUniqueIdYoung(youngPerson.getUniqueId());
+                FriendsUtils.appointmentArrayList.add(appointment);
+                Toast.makeText(getContext(), youngPerson.getName() + " has been added to your match list!", Toast.LENGTH_SHORT);
+            }
+
+            @Override
+            public void onStackEmpty() {
+                mProgressBar.setVisibility(View.GONE);
+                mLinearLayoutContainer.setVisibility(View.GONE);
+                mTextView.setVisibility(View.VISIBLE);
+            }
+        });
+
         return view;
     }
 
@@ -122,7 +152,12 @@ public class MatchFragment extends Fragment {
                     Toast.makeText(getContext(), "onResponse : successful", Toast.LENGTH_SHORT).show();
                     ;
                 } else {
-                    Toast.makeText(getContext(), "Response is : " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
+                    mProgressBar.setVisibility(View.GONE);
+                    mLinearLayoutContainer.setVisibility(View.VISIBLE);
+                    mTextView.setVisibility(View.GONE);
+
+                    mMatchingView.resetStack();
+                    //Toast.makeText(getContext(), "Response is : " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -132,7 +167,7 @@ public class MatchFragment extends Fragment {
                 mLinearLayoutContainer.setVisibility(View.VISIBLE);
                 mTextView.setVisibility(View.GONE);
 
-                Toast.makeText(getContext(), "onFailure " + t.toString(), Toast.LENGTH_SHORT).show();
+                mMatchingView.resetStack();
 
             }
         });

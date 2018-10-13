@@ -39,6 +39,7 @@ public class StartupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent createAccountIntent = new Intent(StartupActivity.this, CreateAccountActivity.class);
                 startActivity(createAccountIntent);
+                finish();
             }
         });
 
@@ -47,6 +48,7 @@ public class StartupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(StartupActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

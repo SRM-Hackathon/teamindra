@@ -2,9 +2,11 @@ package com.example.aditya.friends.splash;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -21,8 +23,10 @@ import android.widget.Toast;
 
 
 import com.example.aditya.friends.R;
+import com.example.aditya.friends.create_account.CreateAccountActivity;
 import com.example.aditya.friends.home.HomeActivity;
 import com.example.aditya.friends.startup.StartupActivity;
+import com.example.aditya.friends.utils.FriendsUtils;
 import com.google.firebase.FirebaseApp;
 
 import static com.example.aditya.friends.utils.FriendsUtils.PERMISSION_ACCESS_FINE_LOCATION;
@@ -34,11 +38,23 @@ public class SplashActivity extends AppCompatActivity{
 
     private Handler mHandler = new Handler();
 
+
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditor;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         FirebaseApp.initializeApp(getApplicationContext());
+
+        FriendsUtils.addDummyData();
+        FriendsUtils.addDummy1();
+        FriendsUtils.addDummy2();
+        FriendsUtils.addDummy3();
+        FriendsUtils.addDummy4();
+        FriendsUtils.addDummy5();
+        FriendsUtils.addDummy6();
 
         mFriendsLogo = (ImageView) findViewById(R.id.friends_logo);
         mFriendsLogoText = (ImageView) findViewById(R.id.friends_logo_text);
@@ -74,12 +90,22 @@ public class SplashActivity extends AppCompatActivity{
             }
         }, 610 + 500);
 
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(CreateAccountActivity.this);
+        final String pass = mPreferences.getString("password", "");
+
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, StartupActivity.class);
-                startActivity(intent);
-                finish();
+                if (pass.isEmpty()){
+
+                    Intent intent = new Intent(SplashActivity.this, StartupActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Intent intent = new Intent(SplashActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         }, 1500);
     }

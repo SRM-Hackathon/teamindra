@@ -43,7 +43,6 @@ public class ProfileFragment extends Fragment {
 
         mNameTextView.setText(FriendsUtils.mOldPersonData.getName());
         mAgeTextView.setText(FriendsUtils.getAgeFromBirthday(FriendsUtils.mOldPersonData.getBirthday()));
-        //TODO : Update Location Text View
         String description = "";
         for(int i = 0; i < FriendsUtils.mOldPersonData.getInterests().size(); i++){
             if (i == 0){
@@ -58,14 +57,12 @@ public class ProfileFragment extends Fragment {
         mEditProfileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO : Intent to EditProfle Activity
             }
         });
 
         mSettingImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO : Intent to Setting Activity
             }
         });
 

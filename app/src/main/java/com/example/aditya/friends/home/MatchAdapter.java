@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.api.YoungPerson;
 import com.example.aditya.friends.utils.FriendsUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,11 @@ public class MatchAdapter extends BaseAdapter {
         }
         viewHolder.mInterests.setText(description);
         viewHolder.mAge.setText(FriendsUtils.getAgeFromBirthday(youngPerson.getBirthday()) + " Years");
-        //TODO : Get location data and apply cover photo and profile pic
+        /* Picasso.get().load(youngPerson.getProfileImageUrl()).centerCrop().into(viewHolder.mCoverPicture);
+        Picasso.get().load(youngPerson.getProfileImageUrl()).centerCrop().into(viewHolder.mCircularProfilePicture); */
+        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(viewHolder.mCoverPicture);
+        Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(viewHolder.mCircularProfilePicture);
+
 
         return convertView;
     }
