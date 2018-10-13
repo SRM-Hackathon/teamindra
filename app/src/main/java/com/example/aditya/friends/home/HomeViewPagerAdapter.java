@@ -19,8 +19,8 @@ public class HomeViewPagerAdapter extends FragmentStatePagerAdapter{
                 return profileFragment;
             }
             case 1 : {
-                ProfileFragment profileFragment = new ProfileFragment();
-                return profileFragment;
+                MatchFragment matchFragment = new MatchFragment();
+                return matchFragment;
             }
             case 2 : {
                 ProfileFragment profileFragment = new ProfileFragment();

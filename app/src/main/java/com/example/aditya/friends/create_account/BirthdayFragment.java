@@ -103,7 +103,7 @@ public class BirthdayFragment extends Fragment {
         mNextTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onBirthdaySubmit(birthDate);
+                mListener.onBirthdaySubmit(mBirthdayTextView.getText().toString());
 
                 GenderFragment genderFragment = new GenderFragment();
                 getFragmentManager()

@@ -42,7 +42,7 @@ public class ProfileFragment extends Fragment {
         mSettingImageButton = (ImageButton) view.findViewById(R.id.home_profile_setting_imageButton);
 
         mNameTextView.setText(FriendsUtils.mOldPersonData.getName());
-        mAgeTextView.setText(getAgeFromBirthday(FriendsUtils.mOldPersonData.getBirthday()));
+        mAgeTextView.setText(FriendsUtils.getAgeFromBirthday(FriendsUtils.mOldPersonData.getBirthday()));
         //TODO : Update Location Text View
         String description = "";
         for(int i = 0; i < FriendsUtils.mOldPersonData.getInterests().size(); i++){
@@ -70,18 +70,5 @@ public class ProfileFragment extends Fragment {
         });
 
         return view;
-    }
-
-    private String getAgeFromBirthday(String birthday){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse(birthday + " 00:00:00");
-        } catch (ParseException e) {
-            e.printStackTrace();
-            date = new Date(60 * 31556952000L);
-        }
-        long ageMilliseconds =  System.currentTimeMillis() - date.getTime();
-        return (ageMilliseconds/31556952000L) + "";
     }
 }

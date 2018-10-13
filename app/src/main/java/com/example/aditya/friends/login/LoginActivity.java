@@ -1,5 +1,6 @@
 package com.example.aditya.friends.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import com.example.aditya.friends.api.ApiManager;
 import com.example.aditya.friends.api.LoginCredential;
 import com.example.aditya.friends.api.OldPerson;
 import com.example.aditya.friends.create_account.CreateAccountActivity;
+import com.example.aditya.friends.home.HomeActivity;
+import com.example.aditya.friends.utils.FriendsUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,6 +78,10 @@ public class LoginActivity extends AppCompatActivity implements NumberFragment.N
                 OldPerson oldPerson = response.body();
                 if (response.isSuccessful() && oldPerson != null){
                     Toast.makeText(LoginActivity.this, "onResponse : successful", Toast.LENGTH_SHORT).show();
+                    FriendsUtils.mOldPersonData = oldPerson;
+                    Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
+                    finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Response is : " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
                 }

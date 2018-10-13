@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/create_account_identity_verification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Identity Verification"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/create_account_identity_verification_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="Uploading a picture with your visible holding the following text written on a paper and should be in Caps with clear visibility"
+        android:gravity="center"
+        android:layout_margin="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="#D3D3D3"
+        android:visibility="visible"/>
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:layout_marginTop="60dp"
+        app:cardBackgroundColor="#64d3d3d3"
+        app:cardCornerRadius="10dp">
+
+        <TextView
+            android:id="@+id/create_account_identity_verification_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="AB43C"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="50sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp"
+            android:textAlignment="center"
+            />
+
+    </android.support.v7.widget.CardView>
+
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/create_account_cardView_container"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="60dp"
+        app:cardBackgroundColor="#dce53256"
+        app:cardCornerRadius="10dp">
+
+        <TextView
+            android:id="@+id/create_account_identity_verification_upload"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:padding="4dp"
+            android:text="Upload"
+            android:textAlignment="center"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:fontFamily="@font/miss_smarty_pants"/>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "222071051842",
+    "firebase_url": "https://friends-43b6c.firebaseio.com",
+    "project_id": "friends-43b6c",
+    "storage_bucket": "friends-43b6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222071051842:android:f13f44b1ff832641",
+        "android_client_info": {
+          "package_name": "com.example.aditya.friends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222071051842-e3acv05nqk86i2moj18hr5dt59tvdnle.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aditya.friends",
+            "certificate_hash": "b55e81d3cd07c1cb51e4ddb2abe13faa921a2eea"
+          }
+        },
+        {
+          "client_id": "222071051842-gpjrdh8tkkni4emdroj1h4us3l8lbb36.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPqpmjQVRsKoSOe89ff9DpUKXeNqBuEwc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222071051842-gpjrdh8tkkni4emdroj1h4us3l8lbb36.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

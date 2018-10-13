@@ -1,12 +1,10 @@
 package com.example.aditya.friends.api;
 
-import android.graphics.Paint;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class OldPerson {
+public class YoungPerson {
 
     @SerializedName("unique_id")
     String uniqueId;
@@ -16,14 +14,6 @@ public class OldPerson {
 
     @SerializedName("password")
     String password;
-
-    public String getVerificationImageUrl() {
-        return verificationImageUrl;
-    }
-
-    public void setVerificationImageUrl(String verificationImageUrl) {
-        this.verificationImageUrl = verificationImageUrl;
-    }
 
     @SerializedName("birthdate")
     String birthday;
@@ -55,7 +45,7 @@ public class OldPerson {
     @SerializedName("message")
     String message;
 
-    public OldPerson(){
+    public YoungPerson(){
         this.name = "Aditya Kumar";
         this.birthday = "30/04/1999";
         this.password = "abcdefghijk";
@@ -175,4 +165,5 @@ public class OldPerson {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

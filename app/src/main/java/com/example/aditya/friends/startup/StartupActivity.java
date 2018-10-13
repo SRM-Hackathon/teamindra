@@ -50,8 +50,8 @@ public class StartupActivity extends AppCompatActivity {
             }
         });
 
-        String ID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-        Toast.makeText(this, ID, Toast.LENGTH_LONG).show();
+        /* String ID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+        Toast.makeText(this, ID, Toast.LENGTH_LONG).show(); */
 
         checkLocationPermission();
 

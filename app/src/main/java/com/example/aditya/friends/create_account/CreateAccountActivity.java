@@ -1,6 +1,7 @@
 package com.example.aditya.friends.create_account;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -15,11 +16,14 @@ import android.widget.Toast;
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.api.ApiManager;
 import com.example.aditya.friends.api.OldPerson;
+import com.example.aditya.friends.home.HomeActivity;
+import com.example.aditya.friends.utils.FriendsUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.UUID;
 
 import retrofit2.Call;
@@ -33,7 +37,9 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
         GenderFragment.GenderFragmentListener,
         InterestFragment.InterestFragmentListener,
         BirthdayFragment.BirthdayFragmentListener,
-        PasswordFragment.PasswordFragmentListener{
+        PasswordFragment.PasswordFragmentListener,
+        ProfilePictureFragment.ProfilePictureFragmentListener,
+        IdentityVerificationFragment.IdentityVerificationFragmentListener {
 
     private OldPerson mOldPersonData;
 
@@ -111,12 +117,23 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
     @Override
     public void onBirthdaySubmit(String birthday) {
         mOldPersonData.setBirthday(birthday);
+        Toast.makeText(CreateAccountActivity.this, birthday, Toast.LENGTH_SHORT).show();
     }
 
 
     @Override
     public void onGenderPreferenceSubmit(String genderPreference) {
         mOldPersonData.setGenderPreference(genderPreference);
+    }
+
+    @Override
+    public void onProfilePictureUpload(String requestID, Map resultData) {
+        //TODO : save the pic url
+    }
+
+    @Override
+    public void onSuccessfulUploadImage(String requestId, Map resultData) {
+        //TODO : Save the pic url
 
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString();
@@ -138,6 +155,10 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
                 OldPerson oldPerson = response.body();
                 if (response.isSuccessful() && oldPerson != null){
                     Toast.makeText(CreateAccountActivity.this, "onResponse : successful", Toast.LENGTH_SHORT).show();
+                    FriendsUtils.mOldPersonData = mOldPersonData;
+                    Intent homeIntent = new Intent(CreateAccountActivity.this, HomeActivity.class);
+                    startActivity(homeIntent);
+                    finish();
                 } else {
                     Toast.makeText(CreateAccountActivity.this, "Response is : " + String.valueOf(response.code()), Toast.LENGTH_SHORT).show();
                 }

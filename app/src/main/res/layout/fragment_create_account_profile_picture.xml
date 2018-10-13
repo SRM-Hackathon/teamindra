@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/create_account_profile_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload your Profile Pic"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="60dp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/create_account_profile_picture_instruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text=" Click on the image below to click a photo "
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="#D3D3D3"
+            android:visibility="visible"/>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="60dp"
+            app:cardBackgroundColor="#dce53256"
+            app:cardCornerRadius="80dp">
+
+            <ImageView
+                android:id="@+id/create_account_profile_picture_imageView"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:background="@color/colorAccent" />
+
+
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/create_account_cardView_container"
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="60dp"
+            app:cardBackgroundColor="#dce53256"
+            app:cardCornerRadius="10dp">
+
+            <TextView
+                android:id="@+id/create_account_profile_picture_next"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:padding="4dp"
+                android:text="Next"
+                android:textAlignment="center"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:fontFamily="@font/miss_smarty_pants"/>
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+</ScrollView>

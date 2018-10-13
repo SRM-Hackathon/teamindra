@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Friends</string>
+    <string name="saved_message">Image Saved at %1$s</string>
 </resources>
