@@ -47,7 +47,7 @@ public class MatchAdapter extends BaseAdapter {
         ViewHolder viewHolder;
 
         if (convertView == null){
-            convertView = layoutInflater.inflate(R.layout.matches_list_item, parent, false);
+            convertView = layoutInflater.inflate(R.layout.list_item_matches, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {

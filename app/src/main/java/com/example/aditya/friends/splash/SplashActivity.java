@@ -19,10 +19,11 @@ import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.cloudinary.android.MediaManager;
+
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.home.HomeActivity;
 import com.example.aditya.friends.startup.StartupActivity;
+import com.google.firebase.FirebaseApp;
 
 import static com.example.aditya.friends.utils.FriendsUtils.PERMISSION_ACCESS_FINE_LOCATION;
 
@@ -37,8 +38,7 @@ public class SplashActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        MediaManager.init(this);
+        FirebaseApp.initializeApp(getApplicationContext());
 
         mFriendsLogo = (ImageView) findViewById(R.id.friends_logo);
         mFriendsLogoText = (ImageView) findViewById(R.id.friends_logo_text);

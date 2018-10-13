@@ -1,8 +1,5 @@
 package com.example.aditya.friends.create_account;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -26,17 +23,26 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.utils.FriendsUtils;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,11 +57,10 @@ public class ProfilePictureFragment extends Fragment {
     private ImageView mProfilePictureImageView;
 
     private Bitmap mProfileImage;
-    private Uri mImageUri;
-    private Map response =  new HashMap();
+    private String mUrl;
 
     public interface ProfilePictureFragmentListener {
-        void onProfilePictureUpload(String requestID, Map resultData);
+        void onProfilePictureUpload(String url);
     }
 
     private ProfilePictureFragmentListener mListener;
@@ -74,6 +79,8 @@ public class ProfilePictureFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_create_account_profile_picture, container, false);
+        FirebaseApp.initializeApp(getContext());
+
 
         mNextTextView = (TextView) view.findViewById(R.id.create_account_profile_picture_next);
         mProfilePictureImageView = (ImageView) view.findViewById(R.id.create_account_profile_picture_imageView);
@@ -115,29 +122,35 @@ public class ProfilePictureFragment extends Fragment {
             mProfileImage = (Bitmap) extras.get("data");
             mProfilePictureImageView.setImageBitmap(mProfileImage);
 
-            // Create a storage reference from our app
-            StorageReference storageRef = storage.getReference();
-            StorageReference mountainsRef = storageRef.child("mountains.jpg");
-            StorageReference mountainImagesRef = storageRef.child("images/mountains.jpg");
-
-
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            mProfileImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] dataImage = baos.toByteArray();
-
-            UploadTask uploadTask = mountainsRef.putBytes(dataImage);
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle unsuccessful uploads
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                }
-            });
-
+            uploadToDataBase();
         }
+    }
+
+
+    private void uploadToDataBase() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        final StorageReference storageRef = storage.getReference();
+        final StorageReference profilePictureRef = storageRef.child(FriendsUtils.mOldPersonData.getUniqueId() + "_profile_pic.jpg");
+
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        mProfileImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] dataImage = baos.toByteArray();
+
+        UploadTask[] uploadTask = {profilePictureRef.putBytes(dataImage)};
+        uploadTask[0].addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(getContext(), "SHIT " + exception.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    mUrl = profilePictureRef.getDownloadUrl().toString();
+                    mListener.onProfilePictureUpload(mUrl);
+                }
+
+            });
     }
 }

@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,10 +22,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cloudinary.Cloudinary;
+
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.utils.FriendsUtils;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,19 +51,17 @@ public class IdentityVerificationFragment extends Fragment {
     private TextView mVerificationCode;
     private TextView mUploadButton;
 
+    private Bitmap mIdentityImage;
+    private String mUrl;
+
     private static final int TAKE_PICTURE = 2001;
     private static final int REQUEST_STORAGE_PERMISSION = 2003;
 
-    private static final String FILE_PROVIDER_AUTHORITY = "com.example.android.fileprovider";
 
-    private Bitmap mIdentityImage;
-    private Uri mImageUri;
-
-    private String mTempPhotoPath;
     private String mRandomAlphanumericString;
 
     public interface IdentityVerificationFragmentListener {
-        void onSuccessfulUploadImage(String requestId, Map resultData);
+        void onSuccessfulUploadImage(String url);
     }
 
     private IdentityVerificationFragmentListener mListener;
@@ -152,6 +163,56 @@ public class IdentityVerificationFragment extends Fragment {
             Bundle extras = data.getExtras();
             mIdentityImage = (Bitmap) extras.get("data");
 
+            getTextFromImage();
+            uploadToDataBase();
+
         }
+    }
+
+    private void getTextFromImage() {
+        FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(mIdentityImage);
+        FirebaseVisionTextRecognizer textRecognizer = FirebaseVision.getInstance()
+                .getOnDeviceTextRecognizer();
+        textRecognizer.processImage(image)
+                .addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+                    @Override
+                    public void onSuccess(FirebaseVisionText result) {
+                        Toast.makeText(getContext(), result.getText(), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(
+                        new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+    }
+
+    private void uploadToDataBase() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        final StorageReference storageRef = storage.getReference();
+        final StorageReference profilePictureRef = storageRef.child(FriendsUtils.mOldPersonData.getUniqueId() + "_identity_pic.jpg");
+
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        mIdentityImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] dataImage = baos.toByteArray();
+
+        UploadTask[] uploadTask = {profilePictureRef.putBytes(dataImage)};
+        uploadTask[0].addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                Toast.makeText(getContext(), "SHIT " + exception.toString(), Toast.LENGTH_SHORT).show();
+
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                mUrl = profilePictureRef.getDownloadUrl().toString();
+                mListener.onSuccessfulUploadImage(mUrl);
+            }
+        });
     }
 }

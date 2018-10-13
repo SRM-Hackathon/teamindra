@@ -1,10 +1,6 @@
 package com.example.aditya.friends.utils;
 
 import android.graphics.Bitmap;
-
-import com.cloudinary.Cloudinary;
-import com.cloudinary.Uploader;
-import com.cloudinary.android.MediaManager;
 import com.example.aditya.friends.api.OldPerson;
 
 import java.io.ByteArrayOutputStream;
@@ -16,11 +12,8 @@ import java.util.Map;
 
 public class FriendsUtils {
 
-    public final static String BASE_URL = "http://431fdfd9.ngrok.io";
+    public final static String BASE_URL = "http://4c3d0dc2.ngrok.io";
     public final static int PERMISSION_ACCESS_FINE_LOCATION = 1001;
-
-    public static Bitmap profilePic = null;
-
 
     public static OldPerson mOldPersonData = new OldPerson();
 

@@ -21,6 +21,7 @@ import com.example.aditya.friends.utils.FriendsUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
         BirthdayFragment.BirthdayFragmentListener,
         PasswordFragment.PasswordFragmentListener,
         ProfilePictureFragment.ProfilePictureFragmentListener,
-        IdentityVerificationFragment.IdentityVerificationFragmentListener {
+        IdentityVerificationFragment.IdentityVerificationFragmentListener{
 
     private OldPerson mOldPersonData;
 
@@ -54,6 +55,8 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        FirebaseApp.initializeApp(this);
 
         mProgressBar = (ProgressBar) findViewById(R.id.create_account_progress_bar);
         mFrameLayout = (FrameLayout) findViewById(R.id.create_account_frameLayout);
@@ -91,6 +94,9 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
     @Override
     public void onNameSubmit(String name) {
         mOldPersonData.setName(name);
+        UUID uuid = UUID.randomUUID();
+        String randomUUIDString = uuid.toString();
+        mOldPersonData.setUniqueId(randomUUIDString);
     }
 
 
@@ -126,22 +132,6 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
         mOldPersonData.setGenderPreference(genderPreference);
     }
 
-    @Override
-    public void onProfilePictureUpload(String requestID, Map resultData) {
-        //TODO : save the pic url
-    }
-
-    @Override
-    public void onSuccessfulUploadImage(String requestId, Map resultData) {
-        //TODO : Save the pic url
-
-        UUID uuid = UUID.randomUUID();
-        String randomUUIDString = uuid.toString();
-        mOldPersonData.setUniqueId(randomUUIDString);
-
-        sendDataToServer();
-    }
-
     private void sendDataToServer(){
         mFrameLayout.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
@@ -172,5 +162,18 @@ public class CreateAccountActivity extends AppCompatActivity implements NameFrag
                 Toast.makeText(CreateAccountActivity.this, "onFailure " + t.toString(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onSuccessfulUploadImage(String url) {
+        mOldPersonData.setVerificationImageUrl(url);
+        Toast.makeText(this, url, Toast.LENGTH_SHORT).show();
+        sendDataToServer();
+    }
+
+    @Override
+    public void onProfilePictureUpload(String url) {
+        mOldPersonData.setProfileImageUrl(url);
+        Toast.makeText(this, url, Toast.LENGTH_SHORT).show();
     }
 }

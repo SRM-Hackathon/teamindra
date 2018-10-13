@@ -37,4 +37,9 @@ public class ApiManager {
         verifyCredentialCall.enqueue(callback);
     }
 
+    public void getYoungPeople(String uniqueId, Callback<YoungPerson> callback){
+        Call<YoungPerson> youngPersonCall = mService.getYoungPeople(uniqueId);
+        youngPersonCall.enqueue(callback);
+    }
+
 }
