@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 public class Appointment  {
 
-    @SerializedName("")
+    @SerializedName("unique_id_old")
     String uniqueIdOld;
 
 
-    @SerializedName("")
+    @SerializedName("unique_id_young")
     String uniqueIdYoung;
 
     @SerializedName("date")

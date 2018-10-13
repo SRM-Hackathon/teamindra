@@ -97,7 +97,6 @@ public class SplashActivity extends AppCompatActivity{
             @Override
             public void run() {
                 if (pass.isEmpty()){
-
                     Intent intent = new Intent(SplashActivity.this, StartupActivity.class);
                     startActivity(intent);
                     finish();

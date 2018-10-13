@@ -23,8 +23,11 @@ import android.graphics.Color;
 
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.api.Appointment;
+import com.example.aditya.friends.utils.FriendsUtils;
 
 import java.util.ArrayList;
+
+import static com.google.gson.internal.bind.TypeAdapters.UUID;
 
 public class AppointmentActivity extends AppCompatActivity {
 
@@ -33,7 +36,6 @@ public class AppointmentActivity extends AppCompatActivity {
 
     private AppointmentAdapter mAdapter;
 
-    private ArrayList<Appointment> mAppointments;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
@@ -42,12 +44,10 @@ public class AppointmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_appointment);
 
-        mAppointments = new ArrayList<>();
-
         mRecyclerView = (RecyclerView) findViewById(R.id.appointment_recyclerView);
         mFloatingActionButton = (FloatingActionButton) findViewById(R.id.appointment_floaingActionButton);
 
-        mAdapter = new AppointmentAdapter(AppointmentActivity.this, mAppointments);
+        mAdapter = new AppointmentAdapter(AppointmentActivity.this, FriendsUtils.appointmentArrayList);
         mRecyclerView.setAdapter(mAdapter);
 
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +89,11 @@ public class AppointmentActivity extends AppCompatActivity {
                                 dialog.show();
                             }
                         });
+
+                        Appointment appointment = new Appointment();
+                        appointment.setLocation(venue);
+                        appointment.setTime(time);
+                        appointment.setDate(dateButton.getText().toString());
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

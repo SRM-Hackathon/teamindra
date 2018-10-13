@@ -52,7 +52,7 @@ public class PasswordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 String password = mPasswordEditText.getText().toString().trim();
-                if (password.length() >=10){
+                if (password.length() >= 6){
                     mListener.onPasswordSubmit(password);
                 } else {
                     mErrorMessage.setVisibility(View.VISIBLE);

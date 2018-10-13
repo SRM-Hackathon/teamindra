@@ -1,6 +1,8 @@
 package com.example.aditya.friends.home;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -14,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 import android.content.Intent;
+import com.example.aditya.friends.startup.StartupActivity;
 
 import com.example.aditya.friends.R;
 import com.example.aditya.friends.appointment.AppointmentActivity;
@@ -88,6 +91,17 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
             case R.id.menu_home_activity_logout : {
+
+                SharedPreferences mPreferences;
+                SharedPreferences.Editor mEditor;
+                mPreferences = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
+                mEditor = mPreferences.edit();
+                mEditor.putString("password", "");
+                mEditor.apply();
+                Intent intent = new Intent(HomeActivity.this, StartupActivity.class);
+                startActivity(intent);
+                finish();
+
             }
 
         }
